@@ -6,12 +6,14 @@
 
 use std::num::ParseIntError;
 
+// Define an error type for invalid number creation.
 #[derive(PartialEq, Debug)]
 enum CreationError {
     Negative,
     Zero,
 }
 
+// Define an error type that includes both parsing errors and creation errors.
 #[derive(PartialEq, Debug)]
 enum ParsePosNonzeroError {
     Creation(CreationError),
