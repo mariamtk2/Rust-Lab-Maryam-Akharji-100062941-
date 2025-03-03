@@ -9,6 +9,7 @@
 // Mango, and Lychee).
 
 use std::collections::HashMap;
+use std::iter::FromIterator;
 
 #[derive(Hash, PartialEq, Eq, Debug)]
 enum Fruit {
@@ -88,7 +89,7 @@ mod tests {
 
         for fruit_kind in fruit_kinds {
             let Some(amount) = basket.get(&fruit_kind) else {
-                panic!("Fruit kind {fruit_kind:?} was not found in basket");
+                panic!("{}","Fruit kind {fruit_kind:?} was not found in basket");
             };
             assert!(*amount > 0);
         }
