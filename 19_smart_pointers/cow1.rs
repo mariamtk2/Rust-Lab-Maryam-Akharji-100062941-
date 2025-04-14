@@ -9,7 +9,6 @@ fn abs_all(input: &mut Cow<[i32]>) {
     for ind in 0..input.len() {
         let value = input[ind];
         if value < 0 {
-            // Clones into a vector if not already owned.
             input.to_mut()[ind] = -value;
         }
     }
@@ -25,7 +24,6 @@ mod tests {
 
     #[test]
     fn reference_mutation() {
-        // Clone occurs because `input` needs to be mutated.
         let vec = vec![-1, 0, 1];
         let mut input = Cow::from(&vec);
         abs_all(&mut input);
@@ -34,7 +32,6 @@ mod tests {
 
     #[test]
     fn reference_no_mutation() {
-        // No clone occurs because `input` doesn't need to be mutated.
         let vec = vec![0, 1, 2];
         let mut input = Cow::from(&vec);
         abs_all(&mut input);
@@ -43,10 +40,6 @@ mod tests {
 
     #[test]
     fn owned_no_mutation() {
-        // We can also pass `vec` without `&` so `Cow` owns it directly. In this
-        // case, no mutation occurs (all numbers are already absolute) and thus
-        // also no clone. But the result is still owned because it was never
-        // borrowed or mutated.
         let vec = vec![0, 1, 2];
         let mut input = Cow::from(vec);
         abs_all(&mut input);
